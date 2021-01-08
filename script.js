@@ -8,37 +8,46 @@ var searchValue;
 var longitude;
 var latitude;
 var city;
+var historyEl = document.getElementById("history");
+let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
 
      
-function init(){
-    //Creates an empty local storage
-    console.log(localStorage.getItem("city"));
-    if (localStorage.getItem("city") == null) {
-        
-        localStorage.setItem("city", JSON.stringify(city));
-    }
-    //Places variable into local storage
-    city = JSON.parse(localStorage.getItem("city"));
-        console.log(city);
-    // for (i=0; i < city.length; i++){
-    //     var city_button = $("<button>").text(city[i]).addClass("btn btn-primary");
-    //     $(".history").append(city_button);
 
-    // }
-}
-init();
 $("#search-button").on("click", function(){
-    console.log(city);
     searchValue  = $("#search-value").val()
-    
-    
-    city.push(searchValue);
-
-    localStorage.setItem("city", city);
-    $("#search-value").val("")
     searchWeather(searchValue);
+    searchHistory.push(searchValue);
+    localStorage.setItem("search",JSON.stringify(searchHistory));
+    renderSearchHistory();
+      
 })
+
+$("#clear-history").on("click",function() {
+    searchHistory = [];
+    renderSearchHistory();
+    localStorage.clear();
+})
+
+function renderSearchHistory() {
+    $("#history").text("");
+    for (let i=0; i<searchHistory.length; i++) {
+        const historyItem = $("<button>");
+        historyItem.text(searchHistory[i]);
+        historyItem.attr("readonly",true);
+        historyItem.attr("class", "form-control d-block bg-white");
+        // historyItem.attr("value", searchHistory[i]);
+        historyItem.on("click",function() {
+            getWeather(historyItem.val());
+        })
+        $("#history").prepend(historyItem);
+    }
+}
+
+renderSearchHistory();
+if (searchHistory.length > 0) {
+    createRow(searchHistory[searchHistory.length - 1]);
+}
 
 function createRow(response) {
     tRow.empty();
@@ -83,11 +92,18 @@ function createRow(response) {
         type: "GET",
         url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&units=imperial" + "&appid=" + APIkey
     }).then(function(fiveDay) {
+        // Ensures only one city forecast is seen
+        $("#fiveFor").empty();
+        var fiveFor = $("<div>").text("5-Day Forecast");
+        $("#fiveFor").append(fiveFor);
         
+
+        // $("#forecast").prepend(forecastAlert);
         $("#day1").empty();
+        // Creating date in forecast
         var forDate = $("<div>").text(moment().add(1, 'days').format('MMMM Do YYYY'));
-        
         $("#day1").append(forDate)
+
         var forIcon = $("<img>");
         forIcon.attr("src", "http://openweathermap.org/img/wn/" + fiveDay.list[4].weather[0].icon+ ".png")
         $("#day1").append(forIcon);
