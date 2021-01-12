@@ -54,7 +54,7 @@ function createRow(response) {
     // Create a new table row element
     var todaysForecast = $("<h5>").text(searchValue + ": " + date)
     var weatherIcon = $("<img>");
-    weatherIcon.attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon+ ".png")
+    weatherIcon.attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon+ ".png")
     todaysForecast.append(weatherIcon);
     
     
@@ -77,7 +77,7 @@ function createRow(response) {
     // Append the table row to the table body
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey
+        url: "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey
     
     }).then(function(UVIndex) {
         console.log(UVIndex)
@@ -90,7 +90,7 @@ function createRow(response) {
     })
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&units=imperial" + "&appid=" + APIkey
+        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&units=imperial" + "&appid=" + APIkey
     }).then(function(fiveDay) {
         // Ensures only one city forecast is seen
         $("#fiveFor").empty();
@@ -105,7 +105,7 @@ function createRow(response) {
         $("#day1").append(forDate)
 
         var forIcon = $("<img>");
-        forIcon.attr("src", "http://openweathermap.org/img/wn/" + fiveDay.list[4].weather[0].icon+ ".png")
+        forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[4].weather[0].icon+ ".png")
         $("#day1").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[4].main.temp + "°F")
         $("#day1").append(forTemp)
@@ -119,7 +119,7 @@ function createRow(response) {
         
         $("#day2").append(forDate)
         var forIcon = $("<img>");
-        forIcon.attr("src", "http://openweathermap.org/img/wn/" + fiveDay.list[11].weather[0].icon+ ".png")
+        forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[11].weather[0].icon+ ".png")
         $("#day2").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[11].main.temp + "°F")
         $("#day2").append(forTemp)
@@ -133,7 +133,7 @@ function createRow(response) {
        
         $("#day3").append(forDate)
         var forIcon = $("<img>");
-        forIcon.attr("src", "http://openweathermap.org/img/wn/" + fiveDay.list[19].weather[0].icon + ".png")
+        forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[19].weather[0].icon + ".png")
         $("#day3").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[19].main.temp + "°F")
         $("#day3").append(forTemp)
@@ -147,7 +147,7 @@ function createRow(response) {
         
         $("#day4").append(forDate)
         var forIcon = $("<img>");
-        forIcon.attr("src", "http://openweathermap.org/img/wn/" + fiveDay.list[27].weather[0].icon+ ".png")
+        forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[27].weather[0].icon+ ".png")
         $("#day4").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[27].main.temp + "°F")
         $("#day4").append(forTemp)
@@ -159,7 +159,7 @@ function createRow(response) {
         var forDate = $("<div>").text(moment().add(5, 'days').format('MMMM Do YYYY'));
         $("#day5").append(forDate)
         var forIcon = $("<img>");
-        forIcon.attr("src", "http://openweathermap.org/img/wn/" + fiveDay.list[35].weather[0].icon+ ".png")
+        forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[35].weather[0].icon+ ".png")
         $("#day5").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[35].main.temp + "°F")
         $("#day5").append(forTemp)
@@ -173,7 +173,7 @@ function createRow(response) {
 function searchWeather(searchValue) {
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial" + "&appid=" + APIkey,
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial" + "&appid=" + APIkey,
     
     }).then(function(response) {
         console.log(response);
