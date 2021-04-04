@@ -3,6 +3,7 @@ The purpose of this site is to display the weather for the city inputted by the 
 
 You can find this app under this deployed link:
 [Weather Dashboard](https://jpls218.github.io/WorkDaySchedule/)
+
 Below is a screenshot of the page once you open it up:
 ![Weather Dashboard](Weather_Dashboard1.jpeg)
 
