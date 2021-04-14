@@ -1,6 +1,5 @@
 $(document).ready(function() {
 var date = moment().format('MMMM Do YYYY');
-
 var APIkey = "e9cacb88c04b1384f06dcfa1e16680a8";
 var tRow = $("#today");
 var forRow = $("#forecast");
@@ -9,18 +8,14 @@ var longitude;
 var latitude;
 var city;
 var historyEl = document.getElementById("history");
-let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
-
-
-     
+let searchHistory = JSON.parse(localStorage.getItem("search")) || [];    
 
 $("#search-button").on("click", function(){
     searchValue  = $("#search-value").val()
     searchWeather(searchValue);
     searchHistory.push(searchValue);
     localStorage.setItem("search",JSON.stringify(searchHistory));
-    renderSearchHistory();
-      
+    renderSearchHistory();     
 })
 
 $("#clear-history").on("click",function() {
@@ -56,22 +51,15 @@ function createRow(response) {
     var weatherIcon = $("<img>");
     weatherIcon.attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon+ ".png")
     todaysForecast.append(weatherIcon);
-    
-    
 
     // Methods run on jQuery selectors return the selector they we run on
     // This is why we can create and save a reference to a td in the same statement we update its text
     var temp = $("<div>")
-    temp.text("Temperature: " + response.main.temp + "°F");
-    
+    temp.text("Temperature: " + response.main.temp + "°F");  
     var humidity = $("<div>").text("Humidity: " + response.main.humidity + "%");
     var windSpeed = $("<div>").text("Wind Speed: " + response.wind.speed + "MPH");
-    
-
     latitude = response.coord.lat;
-    longitude = response.coord.lon;
-
-      
+    longitude = response.coord.lon;   
     // Append the newly created table data to the table row
     tRow.append(todaysForecast, temp, humidity, windSpeed);
     // Append the table row to the table body
@@ -100,53 +88,39 @@ function createRow(response) {
         forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[4].weather[0].icon+ ".png")
         $("#day1").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[4].main.temp + "°F")
-        $("#day1").append(forTemp)
-        
+        $("#day1").append(forTemp) 
         var forHum = $("<div>").text("Humidity: " + fiveDay.list[4].main.humidity + "%")
         $("#day1").append(forHum)
-        
-
         $("#day2").empty();
         var forDate = $("<div>").text(moment().add(2, 'days').format('MMMM Do YYYY'));
-        
         $("#day2").append(forDate)
         var forIcon = $("<img>");
         forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[11].weather[0].icon+ ".png")
         $("#day2").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[11].main.temp + "°F")
-        $("#day2").append(forTemp)
-        
+        $("#day2").append(forTemp) 
         var forHum = $("<div>").text("Humidity: " + fiveDay.list[11].main.humidity + "%")
         $("#day2").append(forHum)
-        
-
         $("#day3").empty();
-        var forDate = $("<div>").text(moment().add(3, 'days').format('MMMM Do YYYY'));
-       
+        var forDate = $("<div>").text(moment().add(3, 'days').format('MMMM Do YYYY'));     
         $("#day3").append(forDate)
         var forIcon = $("<img>");
         forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[19].weather[0].icon + ".png")
         $("#day3").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[19].main.temp + "°F")
-        $("#day3").append(forTemp)
-        
+        $("#day3").append(forTemp)   
         var forHum = $("<div>").text("Humidity: " + fiveDay.list[19].main.humidity + "%")
         $("#day3").append(forHum)
-        
-
         $("#day4").empty();
-        var forDate = $("<div>").text(moment().add(4, 'days').format('MMMM Do YYYY'));
-        
+        var forDate = $("<div>").text(moment().add(4, 'days').format('MMMM Do YYYY'));   
         $("#day4").append(forDate)
         var forIcon = $("<img>");
         forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[27].weather[0].icon+ ".png")
         $("#day4").append(forIcon);
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[27].main.temp + "°F")
-        $("#day4").append(forTemp)
-        
+        $("#day4").append(forTemp)  
         var forHum = $("<div>").text("Humidity: " + fiveDay.list[27].main.humidity + "%")
-        $("#day4").append(forHum)
-       
+        $("#day4").append(forHum)  
         $("#day5").empty();
         var forDate = $("<div>").text(moment().add(5, 'days').format('MMMM Do YYYY'));
         $("#day5").append(forDate)
