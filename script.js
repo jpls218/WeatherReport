@@ -77,16 +77,11 @@ function createRow(response) {
     // Append the table row to the table body
     $.ajax({
         type: "GET",
-        url: "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey
-    
+        url: "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey  
     }).then(function(UVIndex) {
-        console.log(UVIndex)
-        
-        var UVIndex = $("<div>").text("UV Index: " + UVIndex.value);
-        
-        tRow.append(UVIndex);
-        
-        
+        console.log(UVIndex)     
+        var UVIndex = $("<div>").text("UV Index: " + UVIndex.value);      
+        tRow.append(UVIndex);          
     })
     $.ajax({
         type: "GET",
@@ -96,14 +91,11 @@ function createRow(response) {
         $("#fiveFor").empty();
         var fiveFor = $("<div>").text("5-Day Forecast");
         $("#fiveFor").append(fiveFor);
-        
-
         // $("#forecast").prepend(forecastAlert);
         $("#day1").empty();
         // Creating date in forecast
         var forDate = $("<div>").text(moment().add(1, 'days').format('MMMM Do YYYY'));
         $("#day1").append(forDate)
-
         var forIcon = $("<img>");
         forIcon.attr("src", "https://openweathermap.org/img/wn/" + fiveDay.list[4].weather[0].icon+ ".png")
         $("#day1").append(forIcon);
@@ -164,9 +156,7 @@ function createRow(response) {
         var forTemp = $("<div>").text("Temperature: " + fiveDay.list[35].main.temp + "°F")
         $("#day5").append(forTemp)
         var forHum = $("<div>").text("Humidity: " + fiveDay.list[35].main.humidity + "%")
-        $("#day5").append(forHum)
-        
-        
+        $("#day5").append(forHum)      
     })
 };
 
@@ -180,7 +170,4 @@ function searchWeather(searchValue) {
         createRow(response);
     })
 }
-
-
-
 })
