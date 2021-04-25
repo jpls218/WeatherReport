@@ -138,7 +138,6 @@ function searchWeather(searchValue) {
     $.ajax({
         type: "GET",
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial" + "&appid=" + APIkey,
-    
     }).then(function(response) {
         console.log(response);
         createRow(response);
